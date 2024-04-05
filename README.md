@@ -1,5 +1,5 @@
 # diagrams
- Catch all repo for experimenting with diagrams as code. D2, mermaid, structurizr, diagrams.py etc
+ Catch all repo for experimenting with diagrams as code. D2, Mermaid, Structurizr, Python Diagrams etc.
 
 This project is an attempt to learn a few things and accomplish something useful at the same time.  My learning goals include:
 - [C4](https://c4model.com/): a lightweight architecture model that is approachable for many different roles

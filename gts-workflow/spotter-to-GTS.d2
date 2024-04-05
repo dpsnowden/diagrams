@@ -1,0 +1,30 @@
+ra_server: "RA DMAC Server" {
+    shape: image
+    icon: https://icons.terrastruct.com/tech/022-server.svg
+  }
+  scloud: "SOFAR Cloud" {
+    shape: image
+    icon: https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud_light-bg.svg
+  }
+  erddap: "ERDDAP" {
+    shape: image
+    icon: https://icons.terrastruct.com/infra%2F010-data-sharing.svg
+  }
+  
+  nwstg: "NWSTG" {
+    shape: image
+    icon: https://icons.terrastruct.com/essentials%2F119-database.svg
+  }
+  ndbc: "National Data Buoy Center" {
+    shape: image
+    icon: https://icons.terrastruct.com/essentials%2F005-programmer.svg
+  }
+  data_tanks: "NCEP Data Tanks"
+
+
+  Spotter Buoy -> scloud: Iridium/Cell
+  scloud -> ra_server: SOFAR API
+  ra_server -> erddap
+  erddap -> ndbc
+  ndbc -> nwstg: Convert to BUFR
+  nwstg -> data_tanks

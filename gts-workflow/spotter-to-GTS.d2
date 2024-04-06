@@ -1,30 +1,52 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 300
+  }
+}
+
+title: Spotter Buoy Data Flow through NDBC to GTS {
+  shape: text
+  near: top-center
+  style: {
+    font-size: 55
+    italic: true
+  }
+}
+
+spotter: Spotter Buoy {
+  shape: image
+  icon: ../icons/buoy-svgrepo-com.svg
+}
 ra_server: "RA DMAC Server" {
-    shape: image
-    icon: https://icons.terrastruct.com/tech/022-server.svg
-  }
-  scloud: "SOFAR Cloud" {
-    shape: image
-    icon: https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud_light-bg.svg
-  }
-  erddap: "ERDDAP" {
-    shape: image
-    icon: https://icons.terrastruct.com/infra%2F010-data-sharing.svg
-  }
-  
-  nwstg: "NWSTG" {
-    shape: image
-    icon: https://icons.terrastruct.com/essentials%2F119-database.svg
-  }
-  ndbc: "National Data Buoy Center" {
-    shape: image
-    icon: https://icons.terrastruct.com/essentials%2F005-programmer.svg
-  }
-  data_tanks: "NCEP Data Tanks"
+  shape: image
+  icon: https://icons.terrastruct.com/tech/022-server.svg
+}
+scloud: "SOFAR Cloud" {
+  shape: image
+  icon: https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud_light-bg.svg
+}
+erddap: "ERDDAP" {
+  shape: image
+  icon: https://icons.terrastruct.com/infra%2F010-data-sharing.svg
+}
+nwstg: NWS Telecom Gateway {
+  shape: image
+  icon: ../icons/connection-gateway-svgrepo-com.svg
+}
+ndbc: "National Data Buoy Center" {
+  shape: image
+  icon: https://icons.terrastruct.com/essentials%2F005-programmer.svg
+}
+data_tanks: "NCEP Data Tanks" {
+  shape: image
+  icon: ../icons/folders-data-storage-svgrepo-com.svg
+}
 
 
-  Spotter Buoy -> scloud: Iridium/Cell
-  scloud -> ra_server: SOFAR API
-  ra_server -> erddap
-  erddap -> ndbc
-  ndbc -> nwstg: Convert to BUFR
-  nwstg -> data_tanks
+spotter -> scloud: Iridium/Cell
+scloud -> ra_server: SOFAR API
+ra_server -> erddap: Publish to
+erddap -> ndbc: wget
+ndbc -> nwstg: Convert to BUFR
+nwstg -> data_tanks

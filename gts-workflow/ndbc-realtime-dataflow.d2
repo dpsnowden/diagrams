@@ -1,0 +1,122 @@
+vars: {
+    d2-config: {
+      layout-engine: elk
+      theme-id: 300
+    }
+  }
+
+title: Data Flow through NDBC to GTS {
+    shape: text
+    near: top-center
+    style: {
+      font-size: 55
+      italic: true
+    }
+  }
+# Data sources
+xml: XML Source {
+    shape: image
+    icon: https://icons.terrastruct.com/aws%2FMigration%20&%20Transfer%2FAWS-Transfer-for-SFTP_Resource-Icon_light-bg.svg
+}
+wmo: WMO Source {
+    shape: image
+    icon: https://icons.terrastruct.com/aws%2FMigration%20&%20Transfer%2FAWS-Transfer-for-SFTP_Resource-Icon_light-bg.svg
+}
+ra: RA ERDDAP {
+    shape: image
+    icon: https://icons.terrastruct.com/infra%2F010-data-sharing.svg
+}
+# Group the NDBC infrastructure
+
+tglan: "NWSTG LAN" {
+    icon: https://icons.terrastruct.com/aws%2F_Group%20Icons%2FVirtual-private-cloud-VPC_light-bg.svg
+
+    comms: NDBC Communications Server {
+        shape: image
+        icon: https://icons.terrastruct.com/tech%2Fservers.svg
+    }
+    rts: "NDBC Real-Time Server \n [auto qc; create GTS messages]" {
+        shape:image
+        icon: https://icons.terrastruct.com/tech%2F022-server.svg
+    }
+
+    tg: NWS Telecom Gateway {
+        shape: image
+        icon: ../icons/connection-gateway-svgrepo-com.svg
+    }
+
+    comms -> rts
+    rts -> tg: Push to Gateway
+}
+
+stennis: Stennis {
+    rts-stennis: NDBC Real-Time Server @Stennis {
+        shape:image
+        icon: https://icons.terrastruct.com/tech%2F022-server.svg
+    }
+    web: NDBC Web Farm {
+        shape: image
+        icon: ../icons/domain-www-svgrepo-com.svg
+    }
+    db: NDBC database {
+        shape: image
+        icon: https://icons.terrastruct.com/essentials%2F119-database.svg
+    }
+
+
+    rts-stennis -> db
+    rts-stennis -> web
+
+}
+
+
+
+gts: GTS {
+    shape: image
+    icon: ../icons/world-internet-svgrepo-com.svg
+}
+ops: Operational Centers {
+    shape: image
+    icon: ../icons/weather-svgrepo-com.svg
+}
+
+users: Public Users {
+    icon: https://icons.terrastruct.com/essentials%2F359-users.svg
+    shape: image
+}
+
+xml -> tglan.comms: FTP Push
+ra -> tglan.comms: "ERDDAP Pull \n 4x/hour"
+wmo -> tglan.comms: FTP Push
+
+
+tglan.rts -> stennis.web
+tglan.tg -> gts
+gts -> ops: "Distribute to Operational NWP"
+tglan.tg -> stennis.rts-stennis
+
+users -> stennis.web
+
+
+explanation: |md
+One harvesting script per RA that runs 4x/hour. \
+Harvester pulls new data and converts \
+to internal XML for Real-time server.
+
+The NDBC Realtime Server applies auto QC \
+and produces GTS messages \
+(CMAN, FM13, FM64, BUFR, etc.)
+
+The NDBC Realtime Server at Stennis decodes \
+the GTS Bulletins and updates the Database \
+and Web Farm.
+
+NDBC uses the TG Gateway to insert data \
+onto the GTS making it available to \
+the operational weather enterprise \
+(NWS/NCEP and similar centers worldwide.\
+
+The NDBC Database houses all realtime data and \
+supports the manual QC process performed by \
+NDBC staff. It also supports reporting and metrics.
+| {near: center-right}

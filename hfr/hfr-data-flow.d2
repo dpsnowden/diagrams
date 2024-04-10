@@ -1,0 +1,114 @@
+vars: {
+    d2-config: {
+      layout-engine: elk
+      theme-id: 300
+    }
+  }
+
+title: HFRNet Data Flow {
+    shape: text
+    near: top-center
+    style: {
+      font-size: 55
+      italic: true
+    }
+  }
+
+site1: HFR Site {
+    shape: image
+    icon: antenna-svgrepo-com.svg
+}
+site2: HFR Site {
+    shape: image
+    icon: antenna-svgrepo-com.svg
+}
+siteN: HFR Site {
+    shape: image
+    icon: antenna-svgrepo-com.svg
+}
+
+agg: "Aggregation Portals x3" {
+    style.multiple: true
+    rtdb: "Real Time DB \n [MySQL]" {
+        shape: cylinder
+    }
+    ingest
+    process
+    ingest -> process
+}
+site1 -> agg.ingest
+site2 -> agg.ingest
+siteN -> agg.ingest
+
+nccf: NCCF Hosted {
+    ingest: Secure Ingest {
+    
+    }
+    calc: RTV and Wave Processing {
+
+    }
+    egress: "Egress \n PDA or S3" {
+        style: {
+            stroke: red
+        }
+    }
+    rtdb: "Real Time DB \n [MySQL]" {
+        shape: cylinder
+    }
+    ingest -> calc: Radial files
+    calc -> egress
+}
+agg.process <- nccf.ingest: "rsync radials"
+agg.rtdb <-> nccf.rtdb: "???? Query config" {
+    style: {
+        stroke: red
+    }
+}
+
+
+ndbc: NDBC Hosted {
+    ingest: "Ingest \n [Python]"
+    tds: THREDDS Data Server
+    ftp: SFTP
+    archiver: Archive Packger
+}
+nccf.egress <- ndbc.ingest: S3 or PDA ??? {
+    style: {
+        stroke: red
+    }
+}
+
+rps: RPS Hosted {
+    ingest: "Ingest \n [Lambda / S3]"
+    web: "hfradar.ioos.us website"
+    erddap: "Radials ERDDAP"
+    data_lake: "Data Lake" {
+            style: {
+                stroke: "red"   #
+            }
+    }
+    ingest -> web
+    ingest -> erddap 
+    ingest -> data_lake
+}
+model: RA Modelers 
+users: Users 
+
+ndbc.tds <- NCEP Data Tanks: "[wget]"
+ndbc.ftp -> NWSTG: "[Grib ftpsin 42]????"
+rps.ingest -> ndbc.ftp: Pull
+rps.ingest -> nccf.rtdb: "????"
+users -> rps.data_lake: XArray, XREDS, XPublish
+model -> rps.erddap
+NCEI <- ndbc.archiver: Push monthly archive {
+    style: {
+        stroke: red
+    }
+}
+
+# What about the configuration of sites from web site
+rps.web -> agg.rtdb: "Update site configuration" {
+    style: {
+        stroke: red
+    }
+}

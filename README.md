@@ -1,32 +1,24 @@
-# diagrams
-s
- Catch all repo for experimenting with diagrams as code. D2, Mermaid, Structurizr, Python Diagrams etc.
 
-This project is an attempt to learn a few things and accomplish something useful at the same time.  My learning goals include:
+# Diagrams
 
-- [C4](https://c4model.com/): a lightweight architecture model that is approachable for many different roles
-- Structurizr: a software implementation using the C4 model to create and render diagrams.
-- Diagrams as Code: Structurizr DSL, D2, Python Diagrams, and maybe mermaid.  Goal is to be able to embed the diagrams into the same Github repo that is used for project planning.
-- Docker: Just enough to figure out how to deploy a web server and the Structurizr Lite web server
-- Jekyll: to host and automatically build static site
+ Catch all repo for experimenting with diagrams as code. D2, Mermaid, Structurizr, Python Diagrams etc.  It also serves as an inventory of diagrams describing various facets of IOOS/DMAC.  See [ioos.us](https://ioos.us/) [ioos.noaa.gov](https://ioos.noaa.gov/data/) and [ioos.github.io](https://ioos.github.io/).  Where is the data and where does it need to go?
 
-The notes in this README are more notes to self than instructions for others to contribute.  
+## Tools
 
-## Dependencies
+### Mermaid
 
-- [D2](https://d2lang.com/)
 - [mermaid](https://mermaid.js.org/) esp the VSCode and Obsidian plugins
-- [sturcutrizr-lite](https://docs.structurizr.com/lite)
+
+### Python Diagrams
+
 - [Python diagrams](https://diagrams.mingrammer.com/)
-
-## Diagrams as Code
-
-Initially, the diagrams were written using the C4 module in Python Diagrams.  This immediately sucked and I started looking at the Structurizr DSL as a better tool.  Structurizr is a much better tool to build the overall model of the System.  However, it's not a general diagramming tool.  For freeform diagrams, something like D2 is a little better.  Maintain the system model in Structurizr and fill in with Python Diagrams, D2 or Mermaid for one off visualizations.
 
 ### C4 and Structurizr
 
 - [C4](https://c4model.com/): a lightweight architecture model that is approachable for many different roles
 - [Structurizr](https://docs.structurizr.com/): a software implementation using the C4 model to create and render diagrams.
+- [sturcutrizr-lite](https://docs.structurizr.com/lite)
+
 
 Steps:
 
@@ -43,15 +35,24 @@ docker run -it --rm -p 8080:8080 -v /Volumes/develop/hfrnet/architecture/:/usr/l
 
 Currently, download all the diagrams from the web server in png and svg formats and put them in a Google Slide show, there has to be a better way.  Experiment with Github pages later
 
-## D2
+### D2
 
-Also pretty cool and more extensible than C4.   Useful for things that don't fit the C4 model.
+- [D2](https://d2lang.com/)
 
 Links to references:
 
--
+Directory structure that might make it easier to build models that share components (icons, model views, themes)
+```zsh
+/dev/d2
+/dev/d2/icons
+/dev/d2/hfr
+/dev/d2/hfr/context
+/dev/d2/hfr/container/
+/dev/d2/hfr/component
+/dev/d2/hfr/data-flow
+```
 
-## Learning Jekyll and Github Pages
+### Jekyll, Github Pages, and Github Actions
 
 Basic site building on Github using Jekyll (locally first) and also figure out a basic git pull workflow for suggesting changes correctly.  Components include:
 
@@ -69,16 +70,29 @@ Build and serve the site from the local project directory ([from Jekyl quick sta
 bundle exec jekyll serve
 ```
 
-Software and Tools:
+## Topics
 
-- [x] Download a test dsl model
-- [x] Test migrating the models into dsl start with one file for everything
-- [x] Research creating output files, including SVG
-- [x] Utility script to create diagrams and copy files from ~/Downloads to site directory
-- [ ] Research integrating Github and Github actions
-- [ ] Research the structurizr-cli and see if it's easier to create output images with that.
+### Global Telecommunications System
 
-## Getting Started
+[gts-workflow](./gts-workflow/)
+
+GTS, the NOAA Telecomm Gateway, NDBC and all things operational within NOAA
+
+### High Frequency Radar
+
+[hfr](./hfr)
+
+and [ioos/hfrnet](http://github.com/ioos/hfrnet)
+
+### Unified Forecast System Coastal Application
+
+[UFS-Coastal](./ufs-coastal/)
+
+### Profiling Gliders
+
+### IOOS DMAC
+
+TODO: Populate this with existing drawio diagrams.  Can these be moved into a repo?  Just images or links to actual draw.io URLs?
 
 ## License
 

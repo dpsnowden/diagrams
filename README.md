@@ -57,12 +57,6 @@ Directory structure that might make it easier to build models that share compone
 Basic site building on Github using Jekyll (locally first) and also figure out a basic git pull workflow for suggesting changes correctly.  Components include:
 
 - [Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll) and running [Jekyll locally](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll)
-- github-cli
-- More skill with VSCode as a development environment
-- Incorporating the C4 build process below into Github via actions
-- Figuring out a better local development workflow for VSCode preiews of workspace.dsl
-- Incorporating external markdown files into C4/Structurizr.
-- Using D2 as a way to develop less structured C4 diagrams to supplement (or mermaid? There are at least 2 existing mermaid plugins for VSCode)
 
 Build and serve the site from the local project directory ([from Jekyl quick start](https://jekyllrb.com/docs/):
 
@@ -98,6 +92,15 @@ TODO: Populate this with existing drawio diagrams.  Can these be moved into a re
 
 This project is licensed under the Creative Commons-0 License - see the LICENSE file for details
 
-## References
+## References and TODO
 
 Read this for an intro to Github Pages.  Great article [Least you need to know about Github pages](https://tomcam.github.io/least-github-pages/)
+
+Generally get better at:
+
+- github-cli
+- More skill with VSCode as a development environment
+- Incorporating the C4 build process below into Github via actions
+- Figuring out a better local development workflow for VSCode preiews of workspace.dsl
+- Incorporating external markdown files into C4/Structurizr.
+- Using D2 as a way to develop less structured C4 diagrams to supplement (or mermaid? There are at least 2 existing mermaid plugins for VSCode)

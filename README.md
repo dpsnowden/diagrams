@@ -5,6 +5,8 @@
 
 ## Tools
 
+- This is helpful to make VSCode snippets and [templates](https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode)
+
 ### Mermaid
 
 - [mermaid](https://mermaid.js.org/) esp the VSCode and Obsidian plugins
@@ -15,42 +17,11 @@
 
 ### C4 and Structurizr
 
-- [C4](https://c4model.com/): a lightweight architecture model that is approachable for many different roles
-- [Structurizr](https://docs.structurizr.com/): a software implementation using the C4 model to create and render diagrams.
-- [sturcutrizr-lite](https://docs.structurizr.com/lite)
-
-
-Steps:
-
-- Install Docker command line and Docker Desktop
-- Install [Structurizr Lite](https://docs.structurizr.com/lite/installation) docker container.
-
-Running Structurizr Lite locally for the various models in development:
-
-HFRNet is one project I was working on initially. Launching Structurizr Lite on the hfrnet DSL code folder
-
-```zsh
-docker run -it --rm -p 8080:8080 -v /Volumes/develop/hfrnet/architecture/:/usr/local/structurizr structurizr/lite
-```
-
-Currently, download all the diagrams from the web server in png and svg formats and put them in a Google Slide show, there has to be a better way.  Experiment with Github pages later
+[C4 Cheatsheet](c4-structurizr/c4.md)
 
 ### D2
 
-- [D2](https://d2lang.com/)
-
-Links to references:
-
-Directory structure that might make it easier to build models that share components (icons, model views, themes)
-```zsh
-/dev/d2
-/dev/d2/icons
-/dev/d2/hfr
-/dev/d2/hfr/context
-/dev/d2/hfr/container/
-/dev/d2/hfr/component
-/dev/d2/hfr/data-flow
-```
+- [D2](d2/d2.md)
 
 ### Jekyll, Github Pages, and Github Actions
 
@@ -80,9 +51,9 @@ GTS, the NOAA Telecomm Gateway, NDBC and all things operational within NOAA
 
 ### High Frequency Radar
 
-[hfr](./hfr)
-
-and [ioos/hfrnet](http://github.com/ioos/hfrnet)
+Most complete description of HFRNet is at [ioos/hfrnet](http://github.com/ioos/hfrnet)
+[hfr-data-flow.d2](./hfr/hfr-data-flow.d2)
+![hfr-data-flow.svg](./hfr/hfr-data-flow.svg)
 
 ### Unified Forecast System Coastal Application
 
